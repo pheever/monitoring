@@ -1,0 +1,20 @@
+grafana:
+    grafana.ini:
+        server:
+            domain: monitoring.local
+            root_url: http://monitoring.local/grafana/
+            serve_from_sub_path: true
+    ingress:
+        enabled: true
+        hosts:
+            - monitoring.local
+        path: /grafana
+prometheus:
+    prometheusSpec:
+        routePrefix: /prometheus
+        externalUrl: http://monitoring.local/prometheus
+    ingress:
+        enabled: true
+        hosts:
+            - monitoring.local
+        path: /prometheus
