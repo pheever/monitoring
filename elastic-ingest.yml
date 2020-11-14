@@ -54,12 +54,12 @@ esConfig:
     xpack.security.transport.ssl.truststore.path: /usr/share/elasticsearch/config/certs/elastic-certificates.p12
     xpack.security.authc:
       anonymous:
-        username: logger
-        roles: log_shipper
+        username: anonymous
+        roles: anonymous
         authz_exception: true
     xpack.monitoring.collection.enabled: true
   roles.yml: |
-    log_shipper:
+    anonymous:
       indices: 
         - names: ['logs.*']
-          privileges: ['write', 'create_index']
+          privileges: ['write']

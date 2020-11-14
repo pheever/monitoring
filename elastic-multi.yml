@@ -3,17 +3,15 @@ imageTag: "7.9.3"
 antiAffinity: soft
 esJavaOpts: -Xmx512m -Xms512m
 replicas: 1
-fullnameOverride: data
-nodeGroup: data
-
-masterService: master
+fullnameOverride: multi
+nodeGroup: multi
 
 labels:
-  elastic: data
+  elastic: multi
 
 roles:
-  master: "false"
-  ingest: "false"
+  master: "true"
+  ingest: "true"
   data: "true"
 
 resources:
@@ -24,18 +22,23 @@ resources:
     cpu: 250m
     memory: 1Gi
 
+ingress:
+  enabled: true
+  hosts:
+    - elasticsearch.local
+
 volumeClaimTemplate:
   accessModes: 
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
 
 persistence:
   enabled: true
   labels:
     app: elastic
-    role: data
+    role: multi
     enabled: true
   annotations: {}
 
