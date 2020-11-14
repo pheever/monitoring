@@ -1,3 +1,4 @@
+#!/bin/bash
 ###
 ELASTICSEARCH_IMAGE=docker.elastic.co/elasticsearch/elasticsearch:7.9.3
 ###
