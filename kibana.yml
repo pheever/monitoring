@@ -1,27 +1,21 @@
 elasticsearchHosts: http://multi:9200
-
 fullnameOverride: kibana
-
-imageTag: "7.9.3"
-
+imageTag: "7.9.0"
 labels:
   elastic: kibana
-
 replicas: 1
-
 resources:
   requests:
-    cpu: 250m
+    cpu: 500m
     memory: 1Gi
   limits:
-    cpu: 250m
+    cpu: 500m
     memory: 1Gi
 
 ingress:
   enabled: true
   hosts:
     - kibana.local
-
 
 secretMounts:
   - name: elastic-certificates
@@ -79,6 +73,7 @@ extraInitContainers:
       - /bin/sh
       - -c
       - |
+        echo "{\"password\":\"$KIBANA_PASSWORD\"}"
         curl -XPOST $ELASTIC_MASTER/_security/user/$KIBANA_USERNAME/_password \
             -u "$ELASTIC_USERNAME:$ELASTIC_PASSWORD" \
             -H "Content-Type: application/json" \

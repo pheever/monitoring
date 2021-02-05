@@ -1,5 +1,5 @@
 clusterName: logging
-imageTag: "7.9.3"
+imageTag: "7.9.0"
 antiAffinity: soft
 esJavaOpts: -Xmx512m -Xms512m
 replicas: 1
@@ -16,10 +16,10 @@ roles:
 
 resources:
   requests:
-    cpu: 250m
+    cpu: 500m
     memory: 1Gi
   limits:
-    cpu: 250m
+    cpu: 500m
     memory: 1Gi
 
 ingress:
