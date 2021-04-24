@@ -1,10 +1,11 @@
 #!/bin/bash
-###
-ELASTICSEARCH_IMAGE=docker.elastic.co/elasticsearch/elasticsearch:7.9.3
-###
+
+REPO=docker.elastic.co/elasticsearch/elasticsearch
+VER=7.10.2
+
 
 # CREATE SUPER USER CREDENTIALS
-kubectl create secret generic elastic-credentials --from-literal=username=elastic --from-literal=password=$(docker run --rm busybox:1.31.1 /bin/sh -c $'LC_ALL=C tr -dc \x27A-Za-z0-9!#$%&\x27\x27()*+,-./:;<=>?@[]^_`{|}~\x27 </dev/urandom | head -c 20')
+kubectl create secret generic elastic-credentials --from-literal=username=elastic --from-literal=password=$(docker run --rm busybox:1.31.1 /bin/sh -c $'< /dev/urandom tr -cd '[:alnum:]\[\]\$@\#' | head -c50')
 kubectl label secret elastic-credentials app=elastic elastic=user
 
 # CREATE KIBANA USER CREDENTIALS
